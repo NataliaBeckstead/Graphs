@@ -95,27 +95,21 @@ class Graph:
                     s.push(path_copy)
         
 
-    def dfs_recursive(self, starting_vertex, destination_vertex):
-        solution = []
-        visited = set()
+    def dfs_recursive(self, starting_vertex, destination_vertex, path=[], visited=set()):
+        visited.add(starting_vertex)
 
-        def search(v, path):
-            visited.add(v)
-            path = path + [v]
+        if starting_vertex == destination_vertex:
+            return path
+        if len(path) == 0:
+            path.append(starting_vertex)
 
-            if v == destination_vertex:
-                solution.extend(path)
-                return
-            if len(solution) > 0:
-                return
-
-            for neighbor in self.get_neighbors(v):
-                if neighbor not in visited:
-                    search(neighbor, path)
-
-        search(starting_vertex, [])
-
-        return solution
+        for next_vertex in self.get_neighbors(starting_vertex):
+            if next_vertex not in visited:
+                result = self.dfs_recursive(next_vertex, destination_vertex, path + [next_vertex], visited)
+                if result is not None:
+                    print(result)
+                    return result
+        
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
