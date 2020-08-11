@@ -107,7 +107,7 @@ class Graph:
             if next_vertex not in visited:
                 result = self.dfs_recursive(next_vertex, destination_vertex, path + [next_vertex], visited)
                 if result is not None:
-                    print(result)
+                    #print(result)
                     return result
         
 
