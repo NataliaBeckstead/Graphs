@@ -75,7 +75,7 @@ class SocialGraph:
                 paths[user] = [user]
                 continue
             q = Queue()
-            visited = set()
+            visited = {}
             path = [user_id]
             q.enqueue(path)
 
@@ -86,12 +86,11 @@ class SocialGraph:
                     paths[user] = current_path
                     break
                 if current_node not in visited:
-                    visited.add(current_node)
+                    visited[current_node] = True
                     for next_vertex in self.friendships[current_node]:
                         path_copy = list(current_path)
                         path_copy.append(next_vertex)
                         q.enqueue(path_copy)
-                paths[user] = ["No connections"]
 
         return paths
 
