@@ -60,4 +60,4 @@ def earliest_ancestor(ancestors, starting_node):
     return longest_path[-1]
 
 # Both solutions passing test
-print(earliest_ancestor([(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1), (14, 4), (15, 14)], 9))
+print(earliest_ancestor([(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1), (14, 4), (15, 14)], 6))
