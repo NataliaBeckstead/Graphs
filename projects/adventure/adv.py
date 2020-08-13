@@ -34,15 +34,13 @@ visited = []
 opposite_directions = {'n': 's', 's': 'n', 'e': 'w', 'w': 'e'}
 
 def get_moving_direction(curr_room):
-    for dir in discovered_rooms[curr_room]:
+    for dir in sorted(discovered_rooms[curr_room]):
         if discovered_rooms[curr_room][dir] == '?':
-            # print(dir)
             return dir
     
     del visited[-1]
     for key, value in discovered_rooms[visited[-1]].items(): 
         if value == curr_room:
-            # print("opposite_directions[key] ", opposite_directions[key])
             return opposite_directions[key]
        
 
@@ -52,17 +50,12 @@ for door in player.current_room.get_exits():
     discovered_rooms[player.current_room.id][door] = '?'
 
 while len(discovered_rooms) < len(room_graph):
-# for i in range(0, 10):
-
+    # print("I'm in room ", player.current_room.id)
     direction = get_moving_direction(player.current_room.id)
-    # print("direction", direction)
-    # print("discovered rooms ", discovered_rooms)
     player.travel(direction)
     traversal_path.append(direction)
     if player.current_room.id != visited[-1]:
         visited.append(player.current_room.id)
-    # print("I'm in room ", player.current_room.id)
-    # print("visited", visited)
     if player.current_room.id not in discovered_rooms.keys():
         discovered_rooms[player.current_room.id] = {}
         for door in player.current_room.get_exits():
@@ -72,15 +65,6 @@ while len(discovered_rooms) < len(room_graph):
         discovered_rooms[player.current_room.id][opposite_directions[direction]] = visited[-2]
     
 
-
-
-
-# print("main graph", discovered_rooms)
-
-
-
-# TODO:
-## traversal_path = directions I'm moving to
 
 # TRAVERSAL TEST
 visited_rooms = set()
